@@ -1,7 +1,7 @@
 # Description: A simple deployment script to deploy files to a remote server
 # Created by: Kemboi 
 # Followed the roadmap dev guide
-# use the .ssh/config file to set up the ssh connection to the remote server
+# use the .ssh/config file to set up the ssh connection to the remote server saved as was deploy
 #!/bin/bash
 
 LOCAL_PATH="folder/path"
@@ -24,7 +24,9 @@ command ssh aws-deploy "sudo mkdir -p $REMOTE_PATH && sudo chown -R $REMOTE_USER
 echo "Remote directory setup completed successfully!"
 
 echo "Copying files to remote directory..."
-# command rsync -avz -e "ssh -i $SSH_KEY_PATH" "$LOCAL_PATH" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH"
+# rsync uses the -avz flag to archive files and copy them recursively, while preserving symlinks, permissions, timestamps, owner, and group.
+# The --chmod flag is used to set the permissions of the copied files and directories.
+
 command rsync -avz --chmod=D755,F644 "$LOCAL_PATH/" "aws-deploy:$REMOTE_PATH/"
 echo "Files copied successfully!"
 

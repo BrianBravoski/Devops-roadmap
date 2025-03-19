@@ -50,7 +50,7 @@ This is a devops roadmap project that tests the user's ability to use **nginx** 
     echo "Remote directory setup completed successfully!"
     
     echo "Copying files to remote directory..."
-    # command rsync -avz -e "ssh -i $SSH_KEY_PATH" "$LOCAL_PATH" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH"
+    
     command rsync -avz --chmod=D755,F644 "$LOCAL_PATH/" "aws-deploy:$REMOTE_PATH/"
     echo "Files copied successfully!"
     
